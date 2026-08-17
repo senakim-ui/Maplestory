@@ -192,6 +192,119 @@
     <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
 
+  <section style="margin-top:28px;">
+    <h2>이동 경로 지도</h2>
+    <p class="section-note">서쪽 밴프에서 동쪽 끝 PEI까지 간 뒤, 남서쪽으로 내려오며 뉴욕에서 귀국하는 한 방향 동선. 몬트리올(⑤)만 두 번 지납니다 — 10/7 비행기 환승, 10/10 숙박.</p>
+    <figure style="margin:0; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 6px 4px;">
+      <svg viewBox="0 0 1000 620" role="img" aria-label="캐나다·뉴욕 이동 경로 지도: 인천에서 캘거리로 입국해 밴프 3박, 토론토 4박, 프린스 에드워드 아일랜드 2박, 퀘벡 3박, 몬트리올 1박, 뉴욕 2박을 거쳐 인천으로 귀국한다. 항공 6회, 기차 1회, 셔틀 왕복 1회이며 미국 국경은 몬트리올과 뉴욕 사이에서 한 번 넘는다." style="max-width:100%; height:auto; display:block; color:var(--ink);">
+        <defs>
+          <marker id="arrM" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" style="fill:var(--maple)"></path>
+          </marker>
+          <marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" style="fill:var(--spruce)"></path>
+          </marker>
+        </defs>
+
+        <!-- 바다 -->
+        <rect x="0" y="0" width="1000" height="620" fill="rgba(90,150,205,0.10)"></rect>
+
+        <!-- 북미 대륙 (개략 실루엣) -->
+        <path d="M0,0 L648,0
+                 Q668,55 646,105 Q628,150 668,178 Q700,196 745,190
+                 L855,172 Q905,168 908,200
+                 Q845,215 800,246 Q762,272 792,306
+                 Q822,336 786,372 Q742,398 758,446
+                 Q772,494 722,528 Q694,552 702,620
+                 L0,620 Z"
+              fill="rgba(150,130,80,0.13)" stroke="currentColor" stroke-width="1" opacity="0.9" stroke-opacity="0.25"></path>
+        <!-- 노바스코샤 반도 -->
+        <path d="M868,300 Q928,306 952,348 Q922,372 878,342 Q860,318 868,300 Z" fill="rgba(150,130,80,0.13)" stroke="currentColor" stroke-width="1" stroke-opacity="0.25"></path>
+        <!-- PEI 섬 -->
+        <ellipse cx="893" cy="266" rx="24" ry="9" transform="rotate(-14 893 266)" fill="rgba(150,130,80,0.2)" stroke="currentColor" stroke-width="1" stroke-opacity="0.35"></ellipse>
+        <!-- 오대호 & 세인트로렌스강 -->
+        <ellipse cx="522" cy="458" rx="52" ry="16" transform="rotate(-18 522 458)" fill="rgba(90,150,205,0.22)"></ellipse>
+        <path d="M572,442 Q640,388 700,335 Q736,300 762,262" fill="none" stroke="rgba(90,150,205,0.35)" stroke-width="7" stroke-linecap="round"></path>
+        <!-- 미국-캐나다 국경 -->
+        <polyline points="0,205 430,205 545,455 640,442 700,418 815,432" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 6" opacity="0.5"></polyline>
+        <text x="14" y="192" font-size="11" opacity="0.6" fill="currentColor">캐나다 🇨🇦</text>
+        <text x="14" y="226" font-size="11" opacity="0.6" fill="currentColor">미국 🇺🇸</text>
+        <!-- 로키산맥 -->
+        <path d="M60,158 L76,130 L92,158 Z M86,160 L104,126 L122,160 Z M118,158 L132,136 L146,158 Z" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.45"></path>
+
+        <!-- ✈ 1. 인천 → 캘거리 -->
+        <path d="M12,58 Q95,44 176,150" fill="none" style="stroke:var(--maple)" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#arrM)"></path>
+        <text x="36" y="34" font-size="12" font-weight="700" style="fill:var(--maple)">9/28 인천발 ✈ 직항 10.5h · 프리미엄</text>
+
+        <!-- 🚌 2. 캘거리 ↔ 밴프 -->
+        <line x1="178" y1="157" x2="126" y2="151" style="stroke:var(--ink-soft)" stroke-width="2.2" stroke-dasharray="2 4"></line>
+        <text x="96" y="198" font-size="11" style="fill:var(--ink-soft)">🚌 Airporter 90분 왕복</text>
+
+        <!-- ✈ 3. 캘거리 → 토론토 -->
+        <path d="M190,168 Q380,308 550,424" fill="none" style="stroke:var(--maple)" stroke-width="2.2" marker-end="url(#arrM)"></path>
+        <text x="272" y="276" font-size="12" font-weight="700" style="fill:var(--maple)">10/1 ✈ 3h50m</text>
+
+        <!-- ✈ 4. 토론토 → PEI (미국 상공 남쪽 우회 곡선) -->
+        <path d="M570,432 Q762,478 886,276" fill="none" style="stroke:var(--maple)" stroke-width="2.2" marker-end="url(#arrM)"></path>
+        <text x="742" y="472" font-size="12" font-weight="700" style="fill:var(--maple)">10/5 ✈ 2h10m</text>
+
+        <!-- ✈ 5. PEI → 몬트리올(환승) → 퀘벡 -->
+        <path d="M882,272 Q795,326 712,331" fill="none" style="stroke:var(--maple)" stroke-width="1.8" marker-end="url(#arrM)"></path>
+        <path d="M706,321 Q742,304 753,274" fill="none" style="stroke:var(--maple)" stroke-width="1.8" marker-end="url(#arrM)"></path>
+        <text x="788" y="352" font-size="12" font-weight="700" style="fill:var(--maple)">10/7 ✈ 경유 3h40m</text>
+
+        <!-- 🚄 6. 퀘벡 → 몬트리올 (기차) -->
+        <path d="M748,262 Q706,282 699,318" fill="none" style="stroke:var(--spruce)" stroke-width="3.4" marker-end="url(#arrG)"></path>
+        <path d="M748,262 Q706,282 699,318" fill="none" style="stroke:var(--surface)" stroke-width="1.3" stroke-dasharray="5 5"></path>
+        <text x="565" y="270" font-size="12" font-weight="700" style="fill:var(--spruce)">10/10 🚄 VIA Rail 3h</text>
+
+        <!-- ✈ 7. 몬트리올 → 뉴욕 -->
+        <path d="M701,340 L701,530" style="stroke:var(--maple)" stroke-width="2.2" marker-end="url(#arrM)"></path>
+        <text x="596" y="450" font-size="12" font-weight="700" style="fill:var(--maple)">10/11 ✈ 1.5h</text>
+
+        <!-- ✈ 8. 뉴욕 → 인천 -->
+        <path d="M712,548 Q850,584 988,588" fill="none" style="stroke:var(--maple)" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#arrM)"></path>
+        <text x="764" y="612" font-size="12" font-weight="700" style="fill:var(--maple)">10/13 ✈ KE082 인천행 14h</text>
+
+        <!-- 도시 노드 -->
+        <circle cx="119" cy="150" r="7" style="fill:var(--surface); stroke:var(--maple)" stroke-width="2.5"></circle>
+        <text x="98" y="127" font-size="12.5" font-weight="750" fill="currentColor">① 밴프 <tspan font-weight="500" style="fill:var(--ink-soft)">3박</tspan></text>
+
+        <circle cx="182" cy="159" r="4.5" style="fill:var(--surface); stroke:var(--ink-soft)" stroke-width="2"></circle>
+        <text x="193" y="152" font-size="11" style="fill:var(--ink-soft)">캘거리 (환승)</text>
+
+        <circle cx="558" cy="428" r="7" style="fill:var(--surface); stroke:var(--maple)" stroke-width="2.5"></circle>
+        <text x="452" y="422" font-size="12.5" font-weight="750" fill="currentColor">② 토론토 <tspan font-weight="500" style="fill:var(--ink-soft)">4박</tspan></text>
+
+        <circle cx="893" cy="266" r="7" style="fill:var(--surface); stroke:var(--maple)" stroke-width="2.5"></circle>
+        <text x="800" y="236" font-size="12.5" font-weight="750" fill="currentColor">③ PEI 샬럿타운 <tspan font-weight="500" style="fill:var(--ink-soft)">2박</tspan></text>
+
+        <circle cx="758" cy="262" r="7" style="fill:var(--surface); stroke:var(--maple)" stroke-width="2.5"></circle>
+        <text x="700" y="242" font-size="12.5" font-weight="750" fill="currentColor">④ 퀘벡 <tspan font-weight="500" style="fill:var(--ink-soft)">3박</tspan> 🍁</text>
+
+        <circle cx="701" cy="330" r="7" style="fill:var(--surface); stroke:var(--maple)" stroke-width="2.5"></circle>
+        <text x="562" y="338" font-size="12.5" font-weight="750" fill="currentColor">⑤ 몬트리올 <tspan font-weight="500" style="fill:var(--ink-soft)">1박</tspan></text>
+
+        <circle cx="701" cy="542" r="7" style="fill:var(--surface); stroke:var(--maple)" stroke-width="2.5"></circle>
+        <text x="716" y="548" font-size="12.5" font-weight="750" fill="currentColor">⑥ 뉴욕 <tspan font-weight="500" style="fill:var(--ink-soft)">2박</tspan></text>
+
+        <!-- 범례 -->
+        <g font-size="11" fill="currentColor">
+          <line x1="40" y1="486" x2="80" y2="486" style="stroke:var(--maple)" stroke-width="2.6" stroke-dasharray="7 5"></line>
+          <text x="90" y="490">국제선 항공</text>
+          <line x1="40" y1="510" x2="80" y2="510" style="stroke:var(--maple)" stroke-width="2.2"></line>
+          <text x="90" y="514">국내선 항공 4회</text>
+          <line x1="40" y1="534" x2="80" y2="534" style="stroke:var(--spruce)" stroke-width="3.4"></line>
+          <line x1="40" y1="534" x2="80" y2="534" style="stroke:var(--surface)" stroke-width="1.3" stroke-dasharray="5 5"></line>
+          <text x="90" y="538">기차 (VIA Rail)</text>
+          <line x1="40" y1="558" x2="80" y2="558" style="stroke:var(--ink-soft)" stroke-width="2.2" stroke-dasharray="2 4"></line>
+          <text x="90" y="562">공항 셔틀</text>
+        </g>
+      </svg>
+      <figcaption style="font-size:12.5px; color:var(--ink-soft); padding:8px 8px 6px; line-height:1.5;">항공 6회(국제선 2 + 국내선 4) · 기차 1회 · 셔틀 왕복 1회. 몬트리올 주변이 붐비는 이유: 이 지역의 허브 공항이라 10/7 환승 · 10/10 기차 도착 · 10/11 뉴욕행 출발이 모두 여기서 일어나기 때문 — 실제 몸은 계속 한 방향으로만 움직입니다.</figcaption>
+    </figure>
+  </section>
+
   <section>
     <h2>예약 체크리스트</h2>
     <p class="section-note">번호 순서대로 예약하세요. 가격은 2026년 8월 조회 기준이라 변동될 수 있습니다. 체크 상태는 이 브라우저에 저장됩니다.</p>
