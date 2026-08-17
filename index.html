@@ -1,0 +1,446 @@
+<title>메이플 루트 17</title>
+<style>
+  :root {
+    --bg: #f4f6f8;
+    --surface: #ffffff;
+    --surface-2: #eceff2;
+    --ink: #1f262b;
+    --ink-soft: #5b6770;
+    --line: #d9dfe4;
+    --maple: #b23a2e;
+    --maple-soft: #fbeeec;
+    --spruce: #2f5d49;
+    --spruce-soft: #e8f1ec;
+    --amber: #8a5a12;
+    --amber-soft: #faf1de;
+    --link: #9c3227;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15181b;
+      --surface: #1e2226;
+      --surface-2: #262b30;
+      --ink: #e8e6e1;
+      --ink-soft: #a3adb5;
+      --line: #363d43;
+      --maple: #e07a6d;
+      --maple-soft: #3a2522;
+      --spruce: #7fb89e;
+      --spruce-soft: #22322b;
+      --amber: #dfb56b;
+      --amber-soft: #33291a;
+      --link: #e08a7e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15181b;
+    --surface: #1e2226;
+    --surface-2: #262b30;
+    --ink: #e8e6e1;
+    --ink-soft: #a3adb5;
+    --line: #363d43;
+    --maple: #e07a6d;
+    --maple-soft: #3a2522;
+    --spruce: #7fb89e;
+    --spruce-soft: #22322b;
+    --amber: #dfb56b;
+    --amber-soft: #33291a;
+    --link: #e08a7e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  main { max-width: 860px; margin: 0 auto; }
+  a { color: var(--link); }
+  h1, h2, h3 { text-wrap: balance; line-height: 1.3; }
+
+  header.hero { padding: 48px 0 8px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--maple); font-weight: 700; margin-bottom: 10px;
+  }
+  h1 { font-size: 34px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .subtitle { color: var(--ink-soft); margin: 0 0 20px; font-size: 15px; }
+  .route {
+    display: flex; flex-wrap: wrap; gap: 6px 4px; align-items: center;
+    font-size: 13.5px; font-weight: 600; margin-bottom: 20px;
+  }
+  .route .stop {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px 12px; white-space: nowrap;
+  }
+  .route .stop small { color: var(--ink-soft); font-weight: 500; }
+  .route .arrow { color: var(--maple); font-weight: 700; padding: 0 2px; }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px; margin-bottom: 8px;
+  }
+  .stat {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .stat .k { font-size: 12px; color: var(--ink-soft); margin-bottom: 2px; }
+  .stat .v { font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .progress-bar-wrap { margin: 28px 0 6px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-soft); margin-bottom: 6px; }
+  .progress-label b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .progress-track { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--spruce); border-radius: 999px; transition: width .3s ease; }
+
+  section { margin-top: 40px; }
+  h2 { font-size: 21px; margin: 0 0 4px; }
+  .section-note { color: var(--ink-soft); font-size: 14px; margin: 0 0 16px; }
+
+  .group {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    margin-bottom: 14px; overflow: hidden;
+  }
+  .group-head {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 14px 18px 10px; border-bottom: 1px solid var(--line);
+  }
+  .group-head .order {
+    font-size: 13px; font-weight: 800; color: var(--maple);
+    font-variant-numeric: tabular-nums; letter-spacing: .02em; white-space: nowrap;
+  }
+  .group-head h3 { font-size: 16px; margin: 0; }
+  .group-head .why { font-size: 12.5px; color: var(--ink-soft); margin-left: auto; text-align: right; }
+
+  .item {
+    display: grid; grid-template-columns: 24px 1fr auto;
+    gap: 4px 12px; padding: 13px 18px; border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  .item:last-child { border-bottom: none; }
+  .item input[type="checkbox"] {
+    width: 18px; height: 18px; margin-top: 3px; accent-color: var(--spruce); cursor: pointer;
+  }
+  .item .label { font-weight: 650; font-size: 14.5px; }
+  .item .detail { grid-column: 2; color: var(--ink-soft); font-size: 13.5px; font-variant-numeric: tabular-nums; }
+  .item .detail b { color: var(--ink); }
+  .item.done .label, .item.done .detail { text-decoration: line-through; opacity: .55; }
+  .links { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .btn {
+    display: inline-block; text-decoration: none; white-space: nowrap;
+    font-size: 12.5px; font-weight: 700;
+    background: var(--maple-soft); color: var(--link);
+    border: 1px solid var(--line); border-radius: 8px; padding: 5px 11px;
+  }
+  .btn.alt { background: var(--surface-2); color: var(--ink-soft); font-weight: 600; }
+  .btn:hover { border-color: var(--maple); }
+  .btn:focus-visible, .item input:focus-visible { outline: 2px solid var(--maple); outline-offset: 2px; }
+
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 700; border-radius: 5px;
+    padding: 1px 7px; margin-left: 6px; vertical-align: 1px;
+  }
+  .tag.hurry { background: var(--maple-soft); color: var(--maple); }
+  .tag.ok { background: var(--spruce-soft); color: var(--spruce); }
+  .tag.warn { background: var(--amber-soft); color: var(--amber); }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 640px; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; color: var(--ink-soft); letter-spacing: .05em; background: var(--surface-2); white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+  td.date { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
+  td.city { white-space: nowrap; font-weight: 650; }
+  .citycolor { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 7px; vertical-align: 0; }
+
+  .notes { display: grid; gap: 10px; }
+  .note {
+    border-left: 3px solid var(--amber); background: var(--surface);
+    border-radius: 0 10px 10px 0; padding: 11px 16px; font-size: 13.5px;
+    border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .note b { color: var(--amber); }
+
+  footer { margin-top: 48px; font-size: 12.5px; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+
+<main>
+  <header class="hero">
+    <div class="eyebrow">2026.9.28 (월) — 10.14 (수) · 17일 15박 · 무운전 · 여성 솔로</div>
+    <h1>🍁 메이플 루트 17</h1>
+    <p class="subtitle">추석 연휴 뒤 캐나다 횡단 + 뉴욕 경유 귀국 — 밴프 단풍에서 시작해 도깨비의 퀘벡을 지나 브로드웨이에서 끝나는 여정.</p>
+    <div class="route">
+      <span class="stop">밴프 <small>3박</small></span><span class="arrow">→</span>
+      <span class="stop">토론토 <small>4박</small></span><span class="arrow">→</span>
+      <span class="stop">PEI <small>2박</small></span><span class="arrow">→</span>
+      <span class="stop">퀘벡 <small>3박</small></span><span class="arrow">→</span>
+      <span class="stop">몬트리올 <small>1박</small></span><span class="arrow">→</span>
+      <span class="stop">뉴욕 <small>2박</small></span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="k">이동 (항공 6·기차 1·셔틀)</div><div class="v">약 347만원</div></div>
+      <div class="stat"><div class="k">숙박 15박 (크루급)</div><div class="v">약 350–430만원</div></div>
+      <div class="stat"><div class="k">투어·티켓·서류</div><div class="v">약 67–87만원</div></div>
+      <div class="stat"><div class="k">총 예산 (식비 제외)</div><div class="v">약 755–855만원</div></div>
+    </div>
+  </header>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-label"><span>예약 진행률</span><b id="progress-text">0 / 0</b></div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <section>
+    <h2>예약 체크리스트</h2>
+    <p class="section-note">번호 순서대로 예약하세요. 가격은 2026년 8월 조회 기준이라 변동될 수 있습니다. 체크 상태는 이 브라우저에 저장됩니다.</p>
+
+    <div class="group">
+      <div class="group-head"><span class="order">1순위</span><h3>국제선 항공 2장</h3><span class="why">성수기 — 가장 먼저</span></div>
+      <div class="item" data-id="intl-out">
+        <input type="checkbox" aria-label="인천-캘거리 예약 완료">
+        <div><div class="label">9/28 인천 → 캘거리 · 웨스트젯 프리미엄 직항 <span class="tag ok">편한 좌석</span></div>
+        <div class="detail">20:45 → 당일 16:15 (10h30m) · <b>약 ₩1,218,000</b> · 웨스트젯 직접 발권 (프리미엄 캐빈)</div></div>
+        <div class="links"><a class="btn" href="https://www.westjet.com/" target="_blank" rel="noopener">웨스트젯 예약 ↗</a><a class="btn alt" href="https://www.google.com/travel/flights?q=Flights%20from%20Incheon%20to%20Calgary%20on%202026-09-28%20one%20way" target="_blank" rel="noopener">가격 비교 ↗</a></div>
+      </div>
+      <div class="item" data-id="intl-in">
+        <input type="checkbox" aria-label="뉴욕-인천 예약 완료">
+        <div><div class="label">10/13 뉴욕 JFK → 인천 · 대한항공 KE082 직항 이코노미</div>
+        <div class="detail">13:10 → 다음날 17:50 (14h40m) · <b>약 ₩1,007,000</b> · 스카이패스 100% 적립</div></div>
+        <div class="links"><a class="btn" href="https://www.koreanair.com/" target="_blank" rel="noopener">대한항공 예약 ↗</a><a class="btn alt" href="https://www.google.com/travel/flights?q=Flights%20from%20JFK%20to%20Incheon%20on%202026-10-13%20one%20way" target="_blank" rel="noopener">가격 비교 ↗</a></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="order">2순위</span><h3>성수기 숙소 3곳</h3><span class="why">단풍 절정·연휴 — 매진 빠름</span></div>
+      <div class="item" data-id="hotel-quebec">
+        <input type="checkbox" aria-label="퀘벡 숙소 예약 완료">
+        <div><div class="label">퀘벡 · Hôtel Palace Royal <span class="tag hurry">최우선</span></div>
+        <div class="detail"><b>10/7–10 (3박) · 3박 총 약 ₩103만 (1박 약 34만) — 예약 가능 실측 확인 (2026-08-17)</b> · 4성 · 성문 바로 앞 Place d'Youville(유동인구 많은 광장), 실내 수영장 · 올드퀘벡 도보 2분<br>※ 10/6(화) 밤은 퀘벡 전체 블랙아웃(대형 행사 추정)이라 퀘벡 체류를 10/7~10으로 옮김. Clarendon은 10/7·10/8 밤도 부킹닷컴 판매 종료 확인(2026-08-17)이라 이 일정에서 제외. 대안은 <a href="https://www.manoir-victoria.com/index.php/en/" target="_blank" rel="noopener">Manoir Victoria</a>(10/7~ 가능, 1박 ~48만)</div></div>
+        <div class="links"><a class="btn" href="https://www.booking.com/searchresults.html?ss=Hotel+Palace+Royal+Quebec&checkin=2026-10-07&checkout=2026-10-10&group_adults=1&no_rooms=1" target="_blank" rel="noopener">부킹닷컴 예약 ↗</a><a class="btn alt" href="https://www.google.com/travel/search?q=Hotel%20Palace%20Royal%20Quebec&checkin=2026-10-07&checkout=2026-10-10" target="_blank" rel="noopener">가격 비교 ↗</a></div>
+      </div>
+      <div class="item" data-id="hotel-banff">
+        <input type="checkbox" aria-label="밴프 숙소 예약 완료">
+        <div><div class="label">밴프 · Banff Aspen Lodge</div>
+        <div class="detail">9/28–10/1 (3박) · 1박 CAD 190–300 · 조식 포함 · 밴프 애비뉴 도보 6분 · 9월 말은 준성수기라 서두를 것</div></div>
+        <div class="links"><a class="btn" href="https://www.banffaspenlodge.com/" target="_blank" rel="noopener">공식 예약 ↗</a><a class="btn alt" href="https://www.google.com/travel/search?q=Banff%20Aspen%20Lodge&checkin=2026-09-28&checkout=2026-10-01" target="_blank" rel="noopener">가격 비교 ↗</a></div>
+      </div>
+      <div class="item" data-id="hotel-montreal">
+        <input type="checkbox" aria-label="몬트리올 숙소 예약 완료">
+        <div><div class="label">몬트리올 · Le Centre Sheraton <span class="tag warn">추수감사절 연휴</span></div>
+        <div class="detail">10/10–11 (1박) · 1박 CAD 230–350 · 기차역(Gare Centrale) 도보 5분 · 연휴 토요일 밤이라 요금 상승 전 서둘러 예약</div></div>
+        <div class="links"><a class="btn" href="https://www.marriott.com/en-us/hotels/yulsi-le-centre-sheraton-montreal-hotel/overview/" target="_blank" rel="noopener">Marriott 예약 ↗</a><a class="btn alt" href="https://www.google.com/travel/search?q=Le%20Centre%20Sheraton%20Montreal&checkin=2026-10-10&checkout=2026-10-11" target="_blank" rel="noopener">가격 비교 ↗</a></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="order">3순위</span><h3>PEI 투어 — 잔여석 적음</h3><span class="why">확인 시점 잔여 6석</span></div>
+      <div class="item" data-id="tour-pei">
+        <input type="checkbox" aria-label="PEI 투어 예약 완료">
+        <div><div class="label">10/6 (화) 그린게이블스 + 캐번디시 소그룹 투어 <span class="tag hurry">서두르기</span></div>
+        <div class="detail">GetYourGuide · <b>9:00 AM 출발</b> · 4시간 · 약 $100 · 입장료 포함 · 호텔 픽업 · 전날까지 무료취소 + 나중결제 가능 · PE Tours 캘린더 기준 10/6 운영 확인됨 — GYG 결제 전 10/6 슬롯 재확인 (대안: 도착일 10/5 오후 1:30 투어)</div></div>
+        <div class="links"><a class="btn" href="https://www.getyourguide.com/charlottetown-l105067/charlottetown-prince-edward-island-small-group-tour-t385560/?date_from=2026-10-06&date_to=2026-10-06" target="_blank" rel="noopener">GetYourGuide 예약 ↗</a><a class="btn alt" href="https://princeedwardtours.com/tour/green-gables-house-our-island-experience/" target="_blank" rel="noopener">대안: PE Tours ↗</a></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="order">4순위</span><h3>밴프 데이투어</h3><span class="why">모레인 호수 입장 보장</span></div>
+      <div class="item" data-id="tour-banff">
+        <input type="checkbox" aria-label="밴프 투어 예약 완료">
+        <div><div class="label">9/29 (화) 레이크루이스 + 모레인 호수 한인 데이투어</div>
+        <div class="detail">마이리얼트립 약 24.9만원 · <b>하계 시즌 5/1~10/12 운영 + 모레인 정식 허가 차량 6/1~10/12 확인됨</b> — 9/29는 시즌 안 · 밴프 타운 내 호텔 픽업 · 주의: 최소 인원 미달 시 셔틀 대체/취소 가능 — 예약 후 출발 확정 통보 확인, 모레인 입장료(CAD 20) 별도 여부 확인</div></div>
+        <div class="links"><a class="btn" href="https://experiences.myrealtrip.com/products/3704983" target="_blank" rel="noopener">모레인 보장 투어 ↗</a><a class="btn alt" href="https://www.myrealtrip.com/offers/117666" target="_blank" rel="noopener">대안: 조인투어 ↗</a></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="order">5순위</span><h3>캐나다 국내선 4장</h3><span class="why">에어캐나다편은 아시아나클럽 적립</span></div>
+      <div class="item" data-id="dom-1">
+        <input type="checkbox" aria-label="캘거리-토론토 예약 완료">
+        <div><div class="label">10/1 캘거리 → 토론토 · 직항 12:55 → 18:45</div>
+        <div class="detail">3h50m · <b>약 ₩176,000</b> · 밴프 오전 셔틀 후 여유 연결</div></div>
+        <div class="links"><a class="btn" href="https://www.google.com/travel/flights?q=Flights%20from%20Calgary%20to%20Toronto%20on%202026-10-01%20one%20way" target="_blank" rel="noopener">항공편 조회 ↗</a></div>
+      </div>
+      <div class="item" data-id="dom-2">
+        <input type="checkbox" aria-label="토론토-샬럿타운 예약 완료">
+        <div><div class="label">10/5 토론토 → 샬럿타운 · 직항 07:45 → 10:55 <span class="tag hurry">최저가 소진 주의</span></div>
+        <div class="detail">2h10m · <b>약 ₩119,000 (10/5 날짜 실측 확인)</b> · 점심부터 PEI · 이른 아침이 싫으면 08:00편 (약 ₩270,000)</div></div>
+        <div class="links"><a class="btn" href="https://www.google.com/travel/flights?q=Flights%20from%20Toronto%20to%20Charlottetown%20on%202026-10-05%20one%20way" target="_blank" rel="noopener">항공편 조회 ↗</a></div>
+      </div>
+      <div class="item" data-id="dom-3">
+        <input type="checkbox" aria-label="샬럿타운-퀘벡 예약 완료">
+        <div><div class="label">10/7 샬럿타운 → 퀘벡 · 몬트리올 경유 11:20 → 14:00 <span class="tag warn">반드시 단일 발권</span></div>
+        <div class="detail">총 3h40m · <b>약 ₩465,000 (10/7 날짜 실측 확인)</b> · "샬럿타운→퀘벡(YYG→YQB)" 한 티켓으로 구매해야 지연 시 항공사가 책임짐 · 퀘벡 오후 2시 도착</div></div>
+        <div class="links"><a class="btn" href="https://www.google.com/travel/flights?q=Flights%20from%20Charlottetown%20to%20Quebec%20City%20on%202026-10-07%20one%20way" target="_blank" rel="noopener">항공편 조회 ↗</a></div>
+      </div>
+      <div class="item" data-id="dom-4">
+        <input type="checkbox" aria-label="몬트리올-뉴욕 예약 완료">
+        <div><div class="label">10/11 몬트리올 → 뉴욕 LGA · 직항 08:20 → 09:45</div>
+        <div class="detail">1h25m · <b>약 ₩277,000</b> · 오전 10시 전 도착 = 뉴욕 사실상 풀데이 2일</div></div>
+        <div class="links"><a class="btn" href="https://www.google.com/travel/flights?q=Flights%20from%20Montreal%20to%20LGA%20on%202026-10-11%20one%20way" target="_blank" rel="noopener">항공편 조회 ↗</a></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="order">6순위</span><h3>기차 + 공항 셔틀</h3></div>
+      <div class="item" data-id="train">
+        <input type="checkbox" aria-label="VIA Rail 예약 완료">
+        <div><div class="label">10/10 (토) 퀘벡 → 몬트리올 · VIA Rail 오전편 <span class="tag hurry">연휴 토요일 — 최우선 선예약</span></div>
+        <div class="detail">Gare du Palais발 · 약 3시간 · Escape 요금 CAD 35–58 <span class="tag warn">환불·변경 불가</span> · 추수감사절 연휴 첫 토요일이라 조기 매진 가능 — 항공권 확정 즉시 예약</div></div>
+        <div class="links"><a class="btn" href="https://www.viarail.ca/en" target="_blank" rel="noopener">VIA Rail 예약 ↗</a></div>
+      </div>
+      <div class="item" data-id="shuttle">
+        <input type="checkbox" aria-label="Banff Airporter 예약 완료">
+        <div><div class="label">Banff Airporter 왕복 (9/28 캘거리공항→밴프 · 10/1 밴프→공항)</div>
+        <div class="detail">편도 약 1.5시간 · 왕복 약 CAD 150 · 9/28은 16:15 도착 이후 출발편, 10/1은 12:55 비행 기준 오전 9시대 출발편</div></div>
+        <div class="links"><a class="btn" href="https://banffairporter.com/" target="_blank" rel="noopener">Airporter 예약 ↗</a></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="order">7순위</span><h3>나머지 숙소 3곳</h3></div>
+      <div class="item" data-id="hotel-toronto">
+        <input type="checkbox" aria-label="토론토 숙소 예약 완료">
+        <div><div class="label">토론토 · One King West</div>
+        <div class="detail">10/1–5 (4박) · 1박 CAD 190–250 · 금융가 대로변, 유니언역 도보 7분 · 대안: Delta Toronto (역 도보 5분) · 10/4(일)은 친구와 보내는 날</div></div>
+        <div class="links"><a class="btn" href="https://www.onekingwest.com/" target="_blank" rel="noopener">공식 예약 ↗</a><a class="btn alt" href="https://www.google.com/travel/search?q=One%20King%20West%20Toronto&checkin=2026-10-01&checkout=2026-10-05" target="_blank" rel="noopener">가격 비교 ↗</a></div>
+      </div>
+      <div class="item" data-id="hotel-pei">
+        <input type="checkbox" aria-label="샬럿타운 숙소 예약 완료">
+        <div><div class="label">샬럿타운 · Delta Hotels Prince Edward</div>
+        <div class="detail">10/5–7 (2박) · 1박 CAD 150–250 · 워터프런트 대형 체인 · 투어 호텔 픽업 1순위</div></div>
+        <div class="links"><a class="btn" href="https://www.marriott.com/en-us/hotels/yygdp-delta-hotels-prince-edward/overview/" target="_blank" rel="noopener">Marriott 예약 ↗</a></div>
+      </div>
+      <div class="item" data-id="hotel-nyc">
+        <input type="checkbox" aria-label="뉴욕 숙소 예약 완료">
+        <div><div class="label">뉴욕 · citizenM New York Times Square</div>
+        <div class="detail">10/11–13 (2박) · 1박 USD 300–360 · 극장가 한복판, 밤에도 밝음 · E선 50th St역 1블록 = JFK 한 번에</div></div>
+        <div class="links"><a class="btn" href="https://www.citizenm.com/hotels/north-america/new-york/times-square-hotel" target="_blank" rel="noopener">공식 예약 ↗</a></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="order">8순위</span><h3>남은 투어 · 티켓</h3></div>
+      <div class="item" data-id="tour-niagara">
+        <input type="checkbox" aria-label="나이아가라 투어 예약 완료">
+        <div><div class="label">10/2 (금) 나이아가라 당일 투어 (토론토 출발)</div>
+        <div class="detail">마이리얼트립 · 크루즈 포함 조인 or 한인가이드 프라이빗</div></div>
+        <div class="links"><a class="btn" href="https://www.myrealtrip.com/offers/160609" target="_blank" rel="noopener">조인 투어 ↗</a><a class="btn alt" href="https://experiences.myrealtrip.com/products/3797006" target="_blank" rel="noopener">한인 프라이빗 ↗</a></div>
+      </div>
+      <div class="item" data-id="tour-quebec">
+        <input type="checkbox" aria-label="퀘벡 투어 예약 완료">
+        <div><div class="label">10/8 (목) 몽모랑시 폭포 + 오를레앙 섬 투어</div>
+        <div class="detail">마이리얼트립 소그룹 · <b>오를레앙 섬 포함 상품인지 확인</b> 후 예약</div></div>
+        <div class="links"><a class="btn" href="https://www.myrealtrip.com/offers/143084" target="_blank" rel="noopener">마이리얼트립 ↗</a></div>
+      </div>
+      <div class="item" data-id="bar1608">
+        <input type="checkbox" aria-label="Bar 1608 계획 완료">
+        <div><div class="label">퀘벡 · 샤토 프롱트낙 Bar 1608 <span class="tag ok">도깨비 경험</span></div>
+        <div class="detail">숙박 대신 칵테일 + 로비·건물 구경 (투숙객 아니어도 가능) · 저녁 시간대는 대기 있을 수 있음</div></div>
+        <div class="links"><a class="btn" href="https://www.fairmont.com/en/hotels/quebec-city/fairmont-le-chateau-frontenac/dining.html" target="_blank" rel="noopener">Bar 1608 안내 ↗</a></div>
+      </div>
+      <div class="item" data-id="nyc-tickets">
+        <input type="checkbox" aria-label="뉴욕 티켓 예약 완료">
+        <div><div class="label">뉴욕 전망대 · 브로드웨이 뮤지컬 티켓</div>
+        <div class="detail"><b>뮤지컬은 10/11(일) 15:00 마티네로 예약</b> — 일요일 저녁 공연은 드물고 월요일은 대부분 휴관(dark). LGA 09:45 도착이라 마티네 시간에 딱 맞음 · 월요일 공연하는 소수 작품도 대안 · 전망대는 시간지정 사전예약 (10/12 월 저녁 야경 추천)</div></div>
+        <div class="links"><a class="btn" href="https://www.klook.com/ko/city/93-new-york-things-to-do/" target="_blank" rel="noopener">클룩 ↗</a><a class="btn alt" href="https://www.broadway.com/" target="_blank" rel="noopener">Broadway.com ↗</a></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="order">9순위</span><h3>서류 · 멤버십 (출발 2주 전까지)</h3></div>
+      <div class="item" data-id="eta">
+        <input type="checkbox" aria-label="eTA 신청 완료">
+        <div><div class="label">캐나다 eTA</div>
+        <div class="detail">CAD 7 · 온라인 신청, 대부분 몇 분 내 승인 · 5년 유효 · <b>반드시 canada.ca 공식 사이트로</b> (대행 사이트 주의)</div></div>
+        <div class="links"><a class="btn" href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta/apply-ko.html" target="_blank" rel="noopener">공식 신청 ↗</a></div>
+      </div>
+      <div class="item" data-id="esta">
+        <input type="checkbox" aria-label="ESTA 신청 완료">
+        <div><div class="label">미국 ESTA</div>
+        <div class="detail">약 $40 · 승인까지 최대 72시간 · 2년 유효 · <b>공식 사이트(esta.cbp.dhs.gov)로만</b></div></div>
+        <div class="links"><a class="btn" href="https://esta.cbp.dhs.gov/" target="_blank" rel="noopener">공식 신청 ↗</a></div>
+      </div>
+      <div class="item" data-id="ozclub">
+        <input type="checkbox" aria-label="아시아나클럽 가입 완료">
+        <div><div class="label">아시아나클럽 가입 (무료)</div>
+        <div class="detail">에어캐나다 국내선 적립용 · 예약 시 회원번호 입력 · 통합 후 스카이패스로 전환 가능 (10년 유예)</div></div>
+        <div class="links"><a class="btn" href="https://flyasiana.com/" target="_blank" rel="noopener">가입하기 ↗</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>일자별 일정</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>날짜</th><th>도시</th><th>일정 · 이동</th></tr></thead>
+        <tbody>
+          <tr><td class="date">9/28 월</td><td class="city"><span class="citycolor" style="background:#7fa8c9"></span>밴프 1/3</td><td>인천 20:45 → 캘거리 16:15 (프리미엄) → Airporter 셔틀 → 저녁 밴프 애비뉴 산책</td></tr>
+          <tr><td class="date">9/29 화</td><td class="city"><span class="citycolor" style="background:#7fa8c9"></span>밴프 2/3</td><td>레이크루이스 + 모레인 호수 한인 데이투어 (호텔 픽업)</td></tr>
+          <tr><td class="date">9/30 수</td><td class="city"><span class="citycolor" style="background:#7fa8c9"></span>밴프 3/3</td><td>Roam 버스 — 설퍼산 곤돌라 · 존스턴 캐년 · 보우 폭포</td></tr>
+          <tr><td class="date">10/1 목</td><td class="city"><span class="citycolor" style="background:#c9a86a"></span>토론토 1/3</td><td>오전 셔틀 → 캘거리 12:55 → 토론토 18:45 → UP Express로 시내</td></tr>
+          <tr><td class="date">10/2 금</td><td class="city"><span class="citycolor" style="background:#c9a86a"></span>토론토 2/3</td><td>나이아가라 폭포 당일 투어</td></tr>
+          <tr><td class="date">10/3 토</td><td class="city"><span class="citycolor" style="background:#c9a86a"></span>토론토 3/3</td><td>CN타워 · 세인트로렌스 마켓 · 디스틸러리 디스트릭트</td></tr>
+          <tr><td class="date">10/4 일</td><td class="city"><span class="citycolor" style="background:#c9a86a"></span>토론토 4/4</td><td>친구와 보내는 하루</td></tr>
+          <tr><td class="date">10/5 월</td><td class="city"><span class="citycolor" style="background:#b23a2e"></span>PEI 1/2</td><td>토론토 오전 비행(2.5h) → 샬럿타운 도착 → 오후 시내 도보 (빅토리아 로우 · 워터프런트)</td></tr>
+          <tr><td class="date">10/6 화</td><td class="city"><span class="citycolor" style="background:#b23a2e"></span>PEI 2/2</td><td>9AM 그린게이블스 + 캐번디시 투어 → 오후 자유 (그린게이블스는 16시 전 마감 유의)</td></tr>
+          <tr><td class="date">10/7 수</td><td class="city"><span class="citycolor" style="background:#2f5d49"></span>퀘벡 1/3</td><td>샬럿타운 → (몬트리올 경유) → 퀘벡 오후 도착 → 올드퀘벡 첫 산책</td></tr>
+          <tr><td class="date">10/8 목</td><td class="city"><span class="citycolor" style="background:#2f5d49"></span>퀘벡 2/3</td><td>몽모랑시 폭포 + 오를레앙 섬 데이투어</td></tr>
+          <tr><td class="date">10/9 금</td><td class="city"><span class="citycolor" style="background:#2f5d49"></span>퀘벡 3/3</td><td>올드퀘벡 풀데이 — 성곽마을 · 프티 샹플랭 · 뒤프랭 테라스 · 빨간 문 (도깨비 코스) · 저녁 Bar 1608</td></tr>
+          <tr><td class="date">10/10 토</td><td class="city"><span class="citycolor" style="background:#8a5a7a"></span>몬트리올 1/1</td><td>오전 VIA Rail (약 3시간, 연휴 토요일 — 선예약 필수) → 오후 올드몬트리올 · 노트르담 · 마운트로얄 단풍</td></tr>
+          <tr><td class="date">10/11 일</td><td class="city"><span class="citycolor" style="background:#4a4a4a"></span>뉴욕 1/2</td><td>몬트리올 08:20 → 뉴욕 09:45 → 센트럴파크 · 미드타운 · 저녁 뮤지컬</td></tr>
+          <tr><td class="date">10/12 월</td><td class="city"><span class="citycolor" style="background:#4a4a4a"></span>뉴욕 2/2</td><td>풀데이 — 미술관 · 하이라인 · 브루클린 or 전망대</td></tr>
+          <tr><td class="date">10/13 화</td><td class="city">귀국</td><td>JFK 13:10 출발 (KE082)</td></tr>
+          <tr><td class="date">10/14 수</td><td class="city">인천</td><td>17:50 도착 — 수요일 도착이라 이틀 쉬고 복귀 가능</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>예약 전 마지막 확인</h2>
+    <div class="notes">
+      <div class="note"><b>10/6 경유편은 단일 발권.</b> "샬럿타운 → 퀘벡"으로 검색해 한 티켓으로 구매해야 몬트리올 환승 지연 시 항공사가 책임집니다. 절대 두 장으로 나눠 사지 마세요.</div>
+      <div class="note"><b>VIA Rail Escape 요금은 환불 불가.</b> 일정이 확정된 지금은 문제없지만, 변경 여지를 두고 싶으면 Economy 요금(1–2만원 차이)을 선택하세요.</div>
+      <div class="note"><b>운임 클래스별 마일리지 적립률 확인.</b> 에어캐나다 Basic 운임과 특가 클래스는 적립이 0–50%일 수 있습니다. 결제 직전 적립률 표기를 확인하세요.</div>
+      <div class="note"><b>숙소는 무료취소 요금으로.</b> 가격이 내리면 갈아탈 수 있습니다. 특히 퀘벡은 구글 호텔 "가격 추적" 알림을 걸어두세요.</div>
+      <div class="note"><b>출발까지 약 6주 — 지금이 발권 마지노선입니다.</b> 모든 가격은 2026년 8월 17일 실측 기준(항공 6개 구간 당일 재확인, 링크 22개 전수 점검). 항공 요금은 통상 출발 6주 전부터 오르기 시작하므로, 국제선·국내선 전 구간을 <b>이번 주 안에</b> 발권하는 것을 권합니다. 숙소·투어 매진도 성수기 6주 전의 정상적인 속도이니 체크리스트 순서대로 즉시 진행하세요. ESTA(최대 72시간 소요)와 eTA도 이번 주에 함께 신청.</div>
+      <div class="note"><b>2026년 10월 6일(화) 밤은 퀘벡 시내 전체가 블랙아웃입니다</b> (대형 행사 추정). 그래서 이 일정은 퀘벡 체류를 10/7~10으로 잡았습니다 — 임의로 퀘벡 날짜를 앞당기지 마세요. Clarendon·Manoir Victoria는 10/7·10/8 밤도 이미 부킹닷컴 판매 종료(2026-08-17 확인)라, 예약 가능 확인된 Palace Royal을 국제선 다음으로 가장 먼저 처리하세요.</div>
+    </div>
+  </section>
+
+  <footer>메이플 루트 17 · 2026년 8월 17일 계획 확정 · 같은 날 요금·링크 최종 점검 완료 · 밴프 → 토론토 → 프린스 에드워드 아일랜드 → 퀘벡 → 몬트리올 → 뉴욕</footer>
+</main>
+
+<script>
+  (function () {
+    var KEY = "maple-route-17-checks";
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+    var items = document.querySelectorAll(".item[data-id]");
+    var fill = document.getElementById("progress-fill");
+    var text = document.getElementById("progress-text");
+    function update() {
+      var total = items.length, done = 0;
+      items.forEach(function (it) {
+        var cb = it.querySelector("input[type=checkbox]");
+        if (cb.checked) { done++; it.classList.add("done"); } else { it.classList.remove("done"); }
+      });
+      fill.style.width = (total ? (done / total * 100) : 0) + "%";
+      text.textContent = done + " / " + total + " 완료";
+    }
+    items.forEach(function (it) {
+      var id = it.getAttribute("data-id");
+      var cb = it.querySelector("input[type=checkbox]");
+      if (saved[id]) cb.checked = true;
+      cb.addEventListener("change", function () {
+        saved[id] = cb.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+        update();
+      });
+    });
+    update();
+  })();
+</script>
