@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>🍁 메이플 루트 17 (2026.9.28–10.14)</name>
+  <description>캐나다 횡단 + 뉴욕 여행 동선 — 항공 6회(국제선 2·국내선 4), 기차 1회, 셔틀 왕복 1회</description>
+
+  <Style id="stay"><IconStyle><color>ff2e3ab2</color><scale>1.2</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon></IconStyle></Style>
+  <Style id="transit"><IconStyle><color>ff888888</color><scale>0.9</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle></Style>
+  <Style id="flight"><LineStyle><color>ffe86d1a</color><width>3.5</width></LineStyle></Style>
+  <Style id="flightIntl"><LineStyle><color>99e86d1a</color><width>4.5</width></LineStyle></Style>
+  <Style id="train"><LineStyle><color>ff49805d</color><width>4.5</width></LineStyle></Style>
+  <Style id="shuttle"><LineStyle><color>ff777777</color><width>2.5</width></LineStyle></Style>
+
+  <Folder>
+    <name>체류 도시</name>
+    <Placemark><name>① 밴프 3박 (9/28~10/1)</name><styleUrl>#stay</styleUrl>
+      <description>9/28 인천→캘거리 웨스트젯 프리미엄 직항(20:45→16:15) 후 Airporter 셔틀 90분. 숙소: Banff Aspen Lodge. 9/29 레이크루이스+모레인 한인투어, 9/30 설퍼산·존스턴캐년(Roam 버스)</description>
+      <Point><coordinates>-115.572,51.178,0</coordinates></Point></Placemark>
+    <Placemark><name>② 토론토 4박 (10/1~5)</name><styleUrl>#stay</styleUrl>
+      <description>10/1 캘거리→토론토 12:55→18:45. 숙소: One King West. 10/2 나이아가라 투어, 10/3 시내, 10/4(일) 친구와 하루</description>
+      <Point><coordinates>-79.383,43.651,0</coordinates></Point></Placemark>
+    <Placemark><name>③ PEI 샬럿타운 2박 (10/5~7)</name><styleUrl>#stay</styleUrl>
+      <description>10/5 토론토→샬럿타운 07:45→10:55. 숙소: Delta Prince Edward. 10/6 9AM 그린게이블스+캐번디시 투어</description>
+      <Point><coordinates>-63.131,46.238,0</coordinates></Point></Placemark>
+    <Placemark><name>④ 퀘벡시티 3박 (10/7~10)</name><styleUrl>#stay</styleUrl>
+      <description>10/7 샬럿타운→퀘벡 11:20→14:00 (몬트리올 경유, 단일발권). 숙소: Hôtel Palace Royal. 10/8 몽모랑시+오를레앙 투어, 10/9 올드퀘벡·도깨비 코스·Bar 1608</description>
+      <Point><coordinates>-71.208,46.813,0</coordinates></Point></Placemark>
+    <Placemark><name>⑤ 몬트리올 1박 (10/10~11)</name><styleUrl>#stay</styleUrl>
+      <description>10/10(토) VIA Rail 오전편 약 3시간 (추수감사절 연휴 — 선예약). 숙소: Le Centre Sheraton. 오후 올드몬트리올·노트르담·마운트로얄</description>
+      <Point><coordinates>-73.567,45.501,0</coordinates></Point></Placemark>
+    <Placemark><name>⑥ 뉴욕 2박 (10/11~13)</name><styleUrl>#stay</styleUrl>
+      <description>10/11 몬트리올→LGA 08:20→09:45. 숙소: citizenM Times Square. 10/11(일) 15:00 마티네(옵션), 10/12(월) 풀데이. 10/13 JFK 13:10 KE082 → 10/14 인천 도착</description>
+      <Point><coordinates>-74.006,40.713,0</coordinates></Point></Placemark>
+    <Placemark><name>캘거리 공항 (환승)</name><styleUrl>#transit</styleUrl>
+      <description>인천 직항 도착·토론토행 출발 지점. Banff Airporter 셔틀 승하차</description>
+      <Point><coordinates>-113.9928,51.1215,0</coordinates></Point></Placemark>
+  </Folder>
+
+  <Folder>
+    <name>이동 구간</name>
+    <Placemark><name>9/28 ✈ 인천→캘거리 직항 10.5h (웨스트젯 프리미엄)</name><styleUrl>#flightIntl</styleUrl>
+      <LineString><tessellate>1</tessellate><coordinates>126.4407,37.4602,0 -113.9928,51.1215,0</coordinates></LineString></Placemark>
+    <Placemark><name>9/28·10/1 🚌 캘거리공항↔밴프 Airporter 90분</name><styleUrl>#shuttle</styleUrl>
+      <LineString><tessellate>1</tessellate><coordinates>-113.9928,51.1215,0 -115.572,51.178,0</coordinates></LineString></Placemark>
+    <Placemark><name>10/1 ✈ 캘거리→토론토 3h50m</name><styleUrl>#flight</styleUrl>
+      <LineString><tessellate>1</tessellate><coordinates>-113.9928,51.1215,0 -79.383,43.651,0</coordinates></LineString></Placemark>
+    <Placemark><name>10/5 ✈ 토론토→샬럿타운 2h10m</name><styleUrl>#flight</styleUrl>
+      <LineString><tessellate>1</tessellate><coordinates>-79.383,43.651,0 -63.131,46.238,0</coordinates></LineString></Placemark>
+    <Placemark><name>10/7 ✈ 샬럿타운→퀘벡 (몬트리올 경유·단일발권) 3h40m</name><styleUrl>#flight</styleUrl>
+      <LineString><tessellate>1</tessellate><coordinates>-63.131,46.238,0 -73.567,45.501,0 -71.208,46.813,0</coordinates></LineString></Placemark>
+    <Placemark><name>10/10 🚄 퀘벡→몬트리올 VIA Rail 3h</name><styleUrl>#train</styleUrl>
+      <LineString><tessellate>1</tessellate><coordinates>-71.208,46.813,0 -72.55,46.35,0 -73.567,45.501,0</coordinates></LineString></Placemark>
+    <Placemark><name>10/11 ✈ 몬트리올→뉴욕 LGA 1.5h</name><styleUrl>#flight</styleUrl>
+      <LineString><tessellate>1</tessellate><coordinates>-73.567,45.501,0 -74.006,40.713,0</coordinates></LineString></Placemark>
+    <Placemark><name>10/13 ✈ 뉴욕 JFK→인천 KE082 14h</name><styleUrl>#flightIntl</styleUrl>
+      <LineString><tessellate>1</tessellate><coordinates>-73.7781,40.6413,0 126.4407,37.4602,0</coordinates></LineString></Placemark>
+  </Folder>
+</Document>
+</kml>
