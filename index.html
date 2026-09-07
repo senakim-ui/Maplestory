@@ -211,7 +211,9 @@
           <tr><td>투어 · PEI 그린게이블스 익스프레스</td><td>₩107,921</td></tr>
           <tr><td>국내선 · 10/1 캘거리→토론토 (웨스트젯 WS642, 수하물 별도추가 포함)</td><td>₩371,600</td></tr>
           <tr><td>국내선 · 10/5 토론토→샬럿타운 (에어캐나다, ARSPTE, 수하물비 미포함)</td><td>₩268,813</td></tr>
-          <tr><td><b>사전 예약 소계</b></td><td><b>₩8,290,631</b></td></tr>
+          <tr><td>소계 (전체 예약 금액)</td><td>₩8,290,631</td></tr>
+          <tr><td>회사 복지기금 사용분 (차감 — 여러 항목에 분산 사용, KE082 ₩1,009,300 포함)</td><td>-₩2,500,000</td></tr>
+          <tr><td><b>사전 예약 소계 (실부담액)</b></td><td><b>₩5,790,631</b></td></tr>
         </tbody>
       </table>
     </div>
@@ -621,7 +623,7 @@
   // 여행 가계부 — 현지 지출 기록
   (function () {
     var EKEY = "maple-route-17-expenses";
-    var FIXED_TOTAL = 8290631; // 사전 예약 고정 지출 합계 (KRW)
+    var FIXED_TOTAL = 5790631; // 사전 예약 고정 지출 합계 (KRW) — 회사 복지기금 사용분 ₩2,500,000 차감된 실부담액
     var RATES = { KRW: 1, CAD: 1000, USD: 1380 }; // 고정 환율 근사치
 
     var rowsEl = document.getElementById("exp-rows");
